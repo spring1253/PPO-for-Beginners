@@ -50,7 +50,7 @@ def rollout(policy, env, render):
 	"""
 	# Rollout until user kills process
 	while True:
-		obs = env.reset()
+		obs, _ = env.reset()
 		done = False
 
 		# number of timesteps so far
@@ -69,7 +69,8 @@ def rollout(policy, env, render):
 
 			# Query deterministic action from policy and run it
 			action = policy(obs).detach().numpy()
-			obs, rew, done, _ = env.step(action)
+			obs, rew, terminated, truncated, _ = env.step(action)
+			done = terminated | truncated
 
 			# Sum all episodic rewards as we go along
 			ep_ret += rew

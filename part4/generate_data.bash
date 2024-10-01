@@ -8,7 +8,7 @@ SEED_LOWER_BOUND=0                     # Lower bound of random seeds
 SEED_UPPER_BOUND=1000                  # Upper bound of random seeds
 
 # Generate random seeds
-SEEDS=($(shuf -i $SEED_LOWER_BOUND-$SEED_UPPER_BOUND -n $NUM_SEEDS))
+SEEDS=($(gshuf -i $SEED_LOWER_BOUND-$SEED_UPPER_BOUND -n $NUM_SEEDS))
 # Or use fixed seeds
 # SEEDS=(495 741 585 263 325) # Pendulum
 # SEEDS=(702 742 298 470 797) # Bipedal

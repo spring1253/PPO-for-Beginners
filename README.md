@@ -16,6 +16,8 @@ Please note that this PPO implementation assumes a continuous observation and ac
 
 Hope this is helpful, as I wish I had a resource like this when I started my journey into Reinforcement Learning.
 
+Special thanks to Zhirui Xia for doing Part 4 of this tutorial. 
+
 ## Usage
 First I recommend creating a python virtual environment:
 ```
@@ -70,5 +72,5 @@ Please refer to my [Medium article](https://medium.com/@eyyu/coding-ppo-from-scr
 ## Contact
 
 If you have any questions or would like to reach out to me, you can find me here: <br />
-Email: eyyu@ucsd.edu <br />
+Email: eyyu@mit.edu <br />
 LinkedIn: [https://www.linkedin.com/in/eric-yu-engineer/](https://www.linkedin.com/in/eric-yu-engineer/) <br />
