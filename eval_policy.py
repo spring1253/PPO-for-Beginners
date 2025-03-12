@@ -81,7 +81,7 @@ def rollout(policy, env, render):
 		# returns episodic length and return in this iteration
 		yield ep_len, ep_ret
 
-def eval_policy(policy, env, render=False):
+def eval_policy(policy, env, episodes, actor_model, render=False):
 	"""
 		The main function to evaluate our policy with. It will iterate a generator object
 		"rollout", which will simulate each episode and return the most recent episode's
@@ -99,5 +99,9 @@ def eval_policy(policy, env, render=False):
 		NOTE: To learn more about generators, look at rollout's function description
 	"""
 	# Rollout with the policy and environment, and log each episode's data
-	for ep_num, (ep_len, ep_ret) in enumerate(rollout(policy, env, render)):
-		_log_summary(ep_len=ep_len, ep_ret=ep_ret, ep_num=ep_num)
+	with open(f'./{actor_model.replace('.pth', '')}_eval.txt', 'w') as file:
+		for ep_num, (ep_len, ep_ret) in enumerate(rollout(policy, env, render)):
+			if ep_num >= episodes:
+				break
+			_log_summary(ep_len=ep_len, ep_ret=ep_ret, ep_num=ep_num)
+			file.write(f'{ep_ret}\n')

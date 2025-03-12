@@ -78,6 +78,7 @@ class PPO:
 		print(f"{self.timesteps_per_batch} timesteps per batch for a total of {total_timesteps} timesteps")
 		t_so_far = 0 # Timesteps simulated so far
 		i_so_far = 0 # Iterations ran so far
+		start_time = time.time()
 		while t_so_far < total_timesteps:                                                                       # ALG STEP 2
 			# Autobots, roll out (just kidding, we're collecting our batch simulations here)
 			batch_obs, batch_acts, batch_log_probs, batch_rtgs, batch_lens = self.rollout()                     # ALG STEP 3
@@ -145,8 +146,11 @@ class PPO:
 
 			# Save our model if it's time
 			if i_so_far % self.save_freq == 0:
-				torch.save(self.actor.state_dict(), './ppo_actor.pth')
-				torch.save(self.critic.state_dict(), './ppo_critic.pth')
+				torch.save(self.actor.state_dict(), f'./models/ppo_actor_ver1_{total_timesteps//2200}.pth')
+				torch.save(self.critic.state_dict(), f'./models/ppo_critic_ver1_{total_timesteps//2200}.pth')
+		end_time = time.time()
+		with open(f'./models/ppo_actor_ver1_{total_timesteps//2200}.txt', 'w') as file:
+			file.write(f"{end_time - start_time}")
 
 	def rollout(self):
 		"""
@@ -219,8 +223,8 @@ class PPO:
 			batch_rews.append(ep_rews)
 
 		# Reshape data as tensors in the shape specified in function description, before returning
-		batch_obs = torch.tensor(batch_obs, dtype=torch.float)
-		batch_acts = torch.tensor(batch_acts, dtype=torch.float)
+		batch_obs = torch.tensor(np.array(batch_obs), dtype=torch.float)
+		batch_acts = torch.tensor(np.array(batch_acts), dtype=torch.float)
 		batch_log_probs = torch.tensor(batch_log_probs, dtype=torch.float)
 		batch_rtgs = self.compute_rtgs(batch_rews)                                                              # ALG STEP 4
 

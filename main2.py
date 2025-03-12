@@ -8,11 +8,11 @@ import sys
 import torch
 
 from arguments import get_args
-from ppo import PPO
+from ppo2 import PPO
 from network import FeedForwardNN
 from eval_policy import eval_policy
 
-def train(env, hyperparameters, actor_model, critic_model, iterations):
+def train(env, hyperparameters, actor_model, critic_model, iterations, epsilon):
 	"""
 		Trains the model.
 
@@ -45,7 +45,7 @@ def train(env, hyperparameters, actor_model, critic_model, iterations):
 	# Train the PPO model with a specified total timesteps
 	# NOTE: You can change the total timesteps here, I put a big number just because
 	# you can kill the process whenever you feel like PPO is converging
-	model.learn(total_timesteps=iterations*2200)
+	model.learn(total_timesteps=iterations*2200, epsilon=epsilon)
 
 def test(env, actor_model, episodes):
 	"""
@@ -112,7 +112,7 @@ def main(args):
 
 	# Train or test, depending on the mode specified
 	if args.mode == 'train':
-		train(env=env, hyperparameters=hyperparameters, actor_model=args.actor_model, critic_model=args.critic_model, iterations=args.iterations)
+		train(env=env, hyperparameters=hyperparameters, actor_model=args.actor_model, critic_model=args.critic_model, iterations=args.iterations, epsilon=args.epsilon)
 	else:
 		test(env=env, actor_model=args.actor_model, episodes=args.episodes)
 
