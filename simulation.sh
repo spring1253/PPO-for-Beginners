@@ -1,10 +1,10 @@
 #!/bin/bash
 
 MODELS_DIR="models"
-CSV_FILE="models/results3.csv"
-ITERATIONS=(15)  # Example iterations
-EPSILONS=(0.0001 0.001 0.01)  # Example epsilon values
-EPISODES=10  # Number of evaluation episodes
+CSV_FILE="models/results.csv"
+ITERATIONS=(200)  # Example iterations
+EPSILONS=(0.001)  # Example epsilon values
+EPISODES=5  # Number of evaluation episodes
 
 mkdir -p $MODELS_DIR
 

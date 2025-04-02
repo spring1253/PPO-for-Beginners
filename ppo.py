@@ -42,7 +42,7 @@ class PPO:
 		self.obs_dim = env.observation_space.shape[0]
 		self.act_dim = env.action_space.shape[0]
 
-		 # Initialize actor and critic networks
+		# Initialize actor and critic networks
 		self.actor = policy_class(self.obs_dim, self.act_dim)                                                   # ALG STEP 1
 		self.critic = policy_class(self.obs_dim, 1)
 
@@ -186,7 +186,7 @@ class PPO:
 		while t < self.timesteps_per_batch:
 			ep_rews = [] # rewards collected per episode
 
-			# Reset the environment. sNote that obs is short for observation. 
+			# Reset the environment. sNote that obs is short for observation.
 			obs, _ = self.env.reset()
 			done = False
 

@@ -99,7 +99,7 @@ def main(args):
 				'max_timesteps_per_episode': 200, 
 				'gamma': 0.99, 
 				'n_updates_per_iteration': 10,
-				'lr': 3e-4, 
+				'lr': 0.05, 
 				'clip': 0.2,
 				'render': True,
 				'render_every_i': 10
